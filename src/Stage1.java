@@ -68,7 +68,8 @@ public class Stage1 {
 		cap = getRowCount(common);
 		while (count <= cap) {
 			printer.println(common.getString(6) + "," + common.getString(4) + "," + common.getString(5) + ","
-					+ common.getString(12) + "," + common.getString(20).replace(",","") + ", ,");
+					+ common.getString(12) + "," + common.getString(7) + "," + common.getString(9) + ","
+					+ common.getString(10) + "," + common.getString(11) + "," + common.getString(20).replace(",","") + ", ,");
 			count++;
 			common.next();
 		}

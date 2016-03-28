@@ -8,9 +8,6 @@ public class TrainingSetGenerator {
 	public static void main(String[] args) throws IOException, SQLException {
 		FileWriter writer = new FileWriter("TrainingSet.txt", false);
 		PrintWriter printer = new PrintWriter(writer);
-
-		FileWriter writer2 = new FileWriter("RecallSet.txt", false);
-		PrintWriter printer2 = new PrintWriter(writer2);
 		
 		Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1/sys", "root", "matt");
 		Statement s = con.createStatement();
@@ -25,7 +22,8 @@ public class TrainingSetGenerator {
 		int cap = getRowCount(rs);
 		while (count <= cap) {
 			printer.println(rs.getString(6) + "," + rs.getString(4) + "," + rs.getString(5) + ","
-					+ rs.getString(12).split(":|\\,")[0] + "," + rs.getString(20).replace(",","") + ", ,");
+					+ rs.getString(12).split(":|\\,")[0] + "," + rs.getString(7) + "," + rs.getString(9) + ","
+					+ rs.getString(10) + "," + rs.getString(11) + "," + rs.getString(20).replace(",","") + ", ,");
 			count++;
 			rs.next();
 		}
@@ -33,19 +31,6 @@ public class TrainingSetGenerator {
 		System.out.print(" done\n");
 		printer.close();
 		
-		System.out.print("Generating recall set...");
-		rs = s.executeQuery("select * from flat_rcl");
-		
-		count = 1;
-		cap = getRowCount(rs);
-		while (count <= cap) {
-			printer2.println(rs.getString(5) + "," + rs.getString(3) + "," + rs.getString(4) + ","
-					+ rs.getString(7).split(":|\\,")[0] + "," + rs.getString(21).replace(",","") + ",R,");
-			count++;
-			rs.next();
-		}
-		
-		System.out.print(" done\n");
 	}
 	
 	/**
