@@ -21,16 +21,25 @@ public class TrainingSetGenerator {
 		int count = 1;
 		int cap = getRowCount(rs);
 		while (count <= cap) {
+			int fire;
+			int crash;
+			if (rs.getString(7).compareTo("Y") == 0)
+				crash = 1;
+			else 
+				crash = 0;
+			if (rs.getString(9).compareTo("Y") == 0)
+				fire = 1;
+			else 
+				fire = 0;
 			printer.println(rs.getString(6) + "," + rs.getString(4) + "," + rs.getString(5) + ","
-					+ rs.getString(12).split(":|\\,")[0] + "," + rs.getString(7) + "," + rs.getString(9) + ","
-					+ rs.getString(10) + "," + rs.getString(11) + "," + rs.getString(20).replace(",","") + ", ,");
+					+ rs.getString(12).split(":|\\,")[0] + "," + crash + "," + fire + ","
+					+ rs.getString(10) + "," + rs.getString(11) + ",\"" + rs.getString(20).replace(",","") + "\",U");
 			count++;
 			rs.next();
 		}
 		
 		System.out.print(" done\n");
 		printer.close();
-		
 	}
 	
 	/**

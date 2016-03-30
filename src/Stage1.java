@@ -67,9 +67,19 @@ public class Stage1 {
 		count = 1;
 		cap = getRowCount(common);
 		while (count <= cap) {
+			int fire;
+			int crash;
+			if (common.getString(7).compareTo("Y") == 0)
+				crash = 1;
+			else 
+				crash = 0;
+			if (common.getString(9).compareTo("Y") == 0)
+				fire = 1;
+			else 
+				fire = 0;
 			printer.println(common.getString(6) + "," + common.getString(4) + "," + common.getString(5) + ","
-					+ common.getString(12) + "," + common.getString(7) + "," + common.getString(9) + ","
-					+ common.getString(10) + "," + common.getString(11) + "," + common.getString(20).replace(",","") + ", ,");
+					+ common.getString(12) + "," + crash + "," + fire + ","
+					+ common.getString(10) + "," + common.getString(11) + ",\"" + common.getString(20).replace(",","") + "\",U");
 			count++;
 			common.next();
 		}
