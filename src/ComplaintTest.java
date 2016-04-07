@@ -14,7 +14,7 @@ public class ComplaintTest {
 
 	@Test
 	public void test1() {
-		Complaint common = new Complaint("Ford", "Brakes", "Air Bags: Front", "Power Train: Transmission: TCM");
+		Complaint common = new Complaint("Ford", "Brakes/Front", "Air Bags: Front", "Power Train: Transmission: TCM");
 		System.out.println(common.make);
 		System.out.println(common.comp1);
 		System.out.println(common.comp2);

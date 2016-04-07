@@ -4,17 +4,41 @@ import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 
+/**
+ * Stage1 of the SafeRoad application This stage selects the most common
+ * complaints from complaint database "flat_cmpl" based on make and component
+ * system. Once common complaints are determined, they are compiled to the file
+ * "CommonComplaints.txt". In the compilation process, text values are mapped to
+ * corresponding integer values which can be found in LookupTable.java. The
+ * purpose of mapping text to integers is so that they can be passed through the
+ * machine learning algorithms in stage2.
+ * 
+ * @author Matthew Paradiso (matt74@vt.edu)
+ *
+ */
 public class Stage1 {
 
 	public static void main(String[] args) throws SQLException, IOException {
-
+		
+		// file for common complaints to be written to
 		FileWriter writer = new FileWriter("CommonComplaints.txt", false);
 		PrintWriter printer = new PrintWriter(writer);
 
+		// connect to local database. Can be changed to connect to remote
+		// database.
+		// getConncetion parameter 1 is the address of the database
+		// getConnection parameter 2 is the user name for the database
+		// getConnection parameter 3 is the password for the database
 		Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1/sys", "root", "matt");
 		Statement s = con.createStatement();
-		System.out.print("Determining most common complaint makes... ");
 
+		//Build lookup table
+		System.out.print("Building lookup table... ");
+		LookupTable lt = new LookupTable();
+		System.out.print("done\n");
+		
+		System.out.print("Determining most common complaint makes... ");
+		
 		// Run query to count most common makes in complaint database
 		ResultSet makeCount = s.executeQuery(
 				"select distinct MAKETXT, count(*) from flat_cmpl group by MAKETXT ORDER BY count(*) DESC");
@@ -48,6 +72,7 @@ public class Stage1 {
 
 		System.out.print("done\n");
 
+		// build SQL query
 		String filter = "";
 		boolean first = true;
 		for (Complaint complaint : complaints) {
@@ -64,6 +89,7 @@ public class Stage1 {
 
 		ResultSet common = s.executeQuery("SELECT * FROM flat_cmpl WHERE " + filter + " ORDER BY YEARTXT ASC");
 
+		// convert boolean values to 0 (false) and 1 (true)
 		count = 1;
 		cap = getRowCount(common);
 		while (count <= cap) {
@@ -71,15 +97,18 @@ public class Stage1 {
 			int crash;
 			if (common.getString(7).compareTo("Y") == 0)
 				crash = 1;
-			else 
+			else
 				crash = 0;
 			if (common.getString(9).compareTo("Y") == 0)
 				fire = 1;
-			else 
+			else
 				fire = 0;
-			printer.println(common.getString(6) + "," + common.getString(4) + "," + common.getString(5) + ","
-					+ common.getString(12) + "," + crash + "," + fire + ","
-					+ common.getString(10) + "," + common.getString(11) + ",\"" + common.getString(20).replace(",","") + "\",U");
+
+			// print to file, convert remaining text to mapped numerical values
+			printer.println(common.getString(6) + "," + lt.getInt(common.getString(4)) + "," + lt.getInt(common.getString(5)) + ","
+					+ lt.getInt(common.getString(12)) + "," + crash + "," + fire + "," + common.getString(10) + ","
+					+ common.getString(11) + ",\"" + common.getString(6) + " " + common.getString(4) + " "
+					+ common.getString(5) + ": " + common.getString(20).replace(",", "") + "\",U");
 			count++;
 			common.next();
 		}
