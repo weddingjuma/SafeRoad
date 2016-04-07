@@ -33,9 +33,8 @@ public class Stage1 {
 		Statement s = con.createStatement();
 
 		//Build lookup table
-		System.out.print("Building lookup table... ");
+		System.out.println("Initializing...");
 		LookupTable lt = new LookupTable();
-		System.out.print("done\n");
 		
 		System.out.print("Determining most common complaint makes... ");
 		

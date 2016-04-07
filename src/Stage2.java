@@ -23,9 +23,8 @@ public class Stage2 {
 	public static void main(String[] args) throws SQLException, IOException {
 
 		// Build lookup table
-		System.out.print("Building lookup table... ");
+		System.out.println("Initializing...");
 		LookupTable lt = new LookupTable();
-		System.out.print("done\n");
 
 		// set file to print results to
 		FileWriter writer = new FileWriter("PredictedRecalls.txt", false);
