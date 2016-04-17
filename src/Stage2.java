@@ -8,6 +8,8 @@ import net.sf.javaml.classification.Classifier;
 import net.sf.javaml.classification.bayes.NaiveBayesClassifier;
 import net.sf.javaml.core.Dataset;
 import net.sf.javaml.core.Instance;
+import net.sf.javaml.featureselection.ranking.RecursiveFeatureEliminationSVM;
+import net.sf.javaml.featureselection.scoring.GainRatio;
 import net.sf.javaml.tools.data.FileHandler;
 
 /**
@@ -38,18 +40,18 @@ public class Stage2 {
 		nb.buildClassifier(data);
 
 		// load unclassified data for classification
-		Dataset dataForClassification = FileHandler.loadDataset(new File("TrainingSetSmallEmpty.txt"), 9, ",");
+		Dataset dataForClassification = FileHandler.loadDataset(new File("CommonComplaints.txt"), 8, ",");
 
 		// Classify all instances
 		for (Instance inst : dataForClassification) {
 			Object predictedClassValue = nb.classify(inst);
-			// Object realClassValue = inst.classValue();
 			if (predictedClassValue.toString().compareTo("R") == 0)
 				printer.println((int) inst.value(0) + " " + lt.getStr((int) inst.value(1)) + " "
-						+ lt.getStr((int) inst.value(2)) + " " + lt.getStr((int) inst.value(3)) + " " + inst.toString());
+						+ lt.getStr((int) inst.value(2)) + " " + lt.getStr((int) inst.value(3)) + " " + inst.toString().split(";")[1]);
 		}
 
 		System.out.println("Predicted recalls printed to file \"PredictedRecalls.txt\"");
+		
 		printer.close();
 	}
 }

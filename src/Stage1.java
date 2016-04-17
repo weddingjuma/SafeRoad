@@ -42,10 +42,12 @@ public class Stage1 {
 		ResultSet makeCount = s.executeQuery(
 				"select distinct MAKETXT, count(*) from flat_cmpl group by MAKETXT ORDER BY count(*) DESC");
 
-		// Add most commmon 1% of makes to common complaint database
+		// set cap to the number of makes to include in complaints
+		// ex: cap = 5 will include top 5 most complained about makes
 		int count = 0;
-		int cap = (int) (0.01 * getRowCount(makeCount));
+		int cap = 5;
 		ArrayList<Complaint> complaints = new ArrayList<Complaint>();
+		makeCount.next();
 		while (count < cap) {
 			Complaint complaint = new Complaint(makeCount.getString(1).toString());
 			complaints.add(complaint);
