@@ -21,7 +21,7 @@ public class Stage1 {
 	public static void main(String[] args) throws SQLException, IOException {
 		
 		// file for common complaints to be written to
-		FileWriter writer = new FileWriter("CommonComplaints.txt", false);
+		FileWriter writer = new FileWriter("CommonComplaints.csv", false);
 		PrintWriter printer = new PrintWriter(writer);
 
 		// connect to local database. Can be changed to connect to remote
@@ -115,8 +115,16 @@ public class Stage1 {
 		}
 
 		System.out.print("done\n");
-		System.out.println("Results printed to file \"CommonComplaints.txt\"");
+		System.out.println("Results printed to file \"CommonComplaints.csv\"");
 		printer.close();
+		
+		System.out.println();
+		System.out.println("Most common complaints by make and component: ");
+		for (Complaint complaint : complaints) {
+			System.out.println(complaint.make + ", " + complaint.comp1);
+			System.out.println(complaint.make + ", " + complaint.comp2);
+			System.out.println(complaint.make + ", " + complaint.comp3);
+		}
 	}
 
 	/**

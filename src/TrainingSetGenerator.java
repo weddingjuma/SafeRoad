@@ -6,7 +6,7 @@ import java.sql.*;
 public class TrainingSetGenerator {
 
 	public static void main(String[] args) throws IOException, SQLException {
-		FileWriter writer = new FileWriter("TrainingSet.txt", false);
+		FileWriter writer = new FileWriter("TrainingSet.csv", false);
 		PrintWriter printer = new PrintWriter(writer);
 		
 		Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1/sys", "root", "matt");
@@ -14,9 +14,10 @@ public class TrainingSetGenerator {
 		
 		System.out.print("Generating training set...");
 
-		// Run query to count most common makes in complaint database
+		// Run query to count most common makes in complaint databaset
+		// set criteria for training set here
 		ResultSet rs = s.executeQuery(
-				"select * from flat_cmpl where MAKETXT = 'Honda' or MAKETXT = 'Toyota' or MAKETXT = 'Nissan' or MAKETXT = 'Subaru' or MAKETXT = 'Mitsubishi'");
+				"select * from flat_cmpl where MAKETXT = 'Mini'");
 
 		int count = 1;
 		int cap = getRowCount(rs);
