@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * Stage1 of the SafeRoad application This stage selects the most common
  * complaints from complaint database "flat_cmpl" based on make and component
  * system. Once common complaints are determined, they are compiled to the file
- * "CommonComplaints.txt". In the compilation process, text values are mapped to
+ * "CommonComplaints.csv". In the compilation process, text values are mapped to
  * corresponding integer values which can be found in LookupTable.java. The
  * purpose of mapping text to integers is so that they can be passed through the
  * machine learning algorithms in stage2.
@@ -108,8 +108,7 @@ public class Stage1 {
 			// print to file, convert remaining text to mapped numerical values
 			printer.println(common.getString(6) + "," + lt.getInt(common.getString(4)) + "," + lt.getInt(common.getString(5)) + ","
 					+ lt.getInt(common.getString(12)) + "," + crash + "," + fire + "," + common.getString(10) + ","
-					+ common.getString(11) + ",\"" + common.getString(6) + " " + common.getString(4) + " "
-					+ common.getString(5) + ": " + common.getString(20).replace(",", "") + "\",U");
+					+ common.getString(11) + ",\"" + common.getString(20).replace(",", "") + "\",U");
 			count++;
 			common.next();
 		}

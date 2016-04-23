@@ -28,14 +28,14 @@ public class PredictionsTest {
 		System.out.println("Testing Naive Bayes Classification...");
 
 		// Load training set
-		Dataset data = FileHandler.loadDataset(new File("Training_Set.txt"), 9, ",");
+		Dataset data = FileHandler.loadDataset(new File("Training_Set.csv"), 9, ",");
 
 		// Construct a Naive Bayes Classifier and apply training set
 		Classifier nb = new NaiveBayesClassifier(true, true, true);
 		nb.buildClassifier(data);
 
 		// load data for classification
-		Dataset dataForClassification = FileHandler.loadDataset(new File("Training_Set.txt"), 9, ",");
+		Dataset dataForClassification = FileHandler.loadDataset(new File("Training_Set2.csv"), 9, ",");
 		float correctPos = 0;
 		float expectedPos = 0;
 		float predictedPos = 0;
@@ -84,13 +84,13 @@ public class PredictionsTest {
 		System.out.println("Testing Naive Bayes Classification on short dataset...");
 
 		// Load training set
-		data = FileHandler.loadDataset(new File("Training_Set_Short.txt"), 5, ",");
+		data = FileHandler.loadDataset(new File("TestSetShort.csv"), 5, ",");
 
 		// apply training set
 		nb.buildClassifier(data);
 
 		// load data for classification
-		dataForClassification = FileHandler.loadDataset(new File("Training_Set_Short.txt"), 5, ",");
+		dataForClassification = FileHandler.loadDataset(new File("TestSetShort.csv"), 5, ",");
 
 		correctPos = 0;
 		expectedPos = 0;
@@ -136,14 +136,14 @@ public class PredictionsTest {
 		System.out.println("Testing K-Nearest Neighbors Classification...");
 
 		// Load training set, does not work with text values
-		data = FileHandler.loadDataset(new File("Training_Set_No_Text.txt"), 4, ",");
+		data = FileHandler.loadDataset(new File("TestSetNoText.csv"), 4, ",");
 		
 		// Build a K-Nearest Neighbors classifier
 		Classifier knn = new KNearestNeighbors(10);
 		knn.buildClassifier(data);
 
 		// load data for classification
-		dataForClassification = FileHandler.loadDataset(new File("Training_Set_No_Text.txt"), 4, ",");
+		dataForClassification = FileHandler.loadDataset(new File("TestSetNoText.csv"), 4, ",");
 
 		correctPos = 0;
 		expectedPos = 0;

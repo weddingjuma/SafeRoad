@@ -91,6 +91,8 @@ public class LookupTable {
 		intToStr.put(39, "HUMMER");
 		strToInt.put("DAEWOO", 40);
 		intToStr.put(40, "DAEWOO");
+		strToInt.put("FIAT", 41);
+		intToStr.put(41, "FIAT");
 		
 		//add component systems to tables
 		strToInt.put("WHEELS", 101);
@@ -139,7 +141,10 @@ public class LookupTable {
 		intToStr.put(122, "LATCHES");
 		strToInt.put("TRANSMISSION", 123);
 		intToStr.put(123, "TRANSMISSION");
-		
+		strToInt.put("TRAILER HITCHES", 124);
+		intToStr.put(124, "TRAILER HITCHES");
+		strToInt.put("FUEL/PROPULSION SYSTEM", 125);
+		intToStr.put(125, "FUEL/PROPULSION SYSTEM");
 		
 		//add all vehicle makes to table
 		Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1/sys", "root", "matt");
