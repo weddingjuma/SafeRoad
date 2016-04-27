@@ -62,10 +62,10 @@ public class PredictionsTest {
 		float precision = correctPos / predictedPos;
 		float recall = correctPos / expectedPos;
 		float fscore = 2 * ((precision * recall) / (precision + recall));
-		System.out.println("Naive Bayes Classifier Accuracy: " + fscore);
+		System.out.println("Naive Bayes Classifier F-Test Score: " + fscore);
 		
 		System.out.println();
-		System.out.println("Naive Bayes Attribute Scores: ");
+		System.out.println("Naive Bayes Attribute Gain Ratios: ");
 		// Create a feature scoring algorithm
 		GainRatio ga = new GainRatio();
 		// Apply the algorithm to the data set
@@ -116,11 +116,11 @@ public class PredictionsTest {
 		precision = correctPos / predictedPos;
 		recall = correctPos / expectedPos;
 		fscore = 2 * ((precision * recall) / (precision + recall));
-		System.out.println("Naive Bayes Classifier Accuracy: " + fscore);
+		System.out.println("Naive Bayes Classifier F-Test Score: " + fscore);
 		
 		
 		System.out.println();
-		System.out.println("Naive Bayes Attribute Scores (Short Dataset): ");
+		System.out.println("Naive Bayes Attribute Gain Ratios (Short Dataset): ");
 		// Create a feature scoring algorithm
 		ga = new GainRatio();
 		// Apply the algorithm to the data set
@@ -169,10 +169,10 @@ public class PredictionsTest {
 		precision = correctPos / predictedPos;
 		recall = correctPos / expectedPos;
 		fscore = 2 * ((precision * recall) / (precision + recall));
-		System.out.println("K-Nearest Neighbors Classifier Accuracy: " + fscore);
+		System.out.println("K-Nearest Neighbors Classifier F-Test Score: " + fscore);
 		
 		System.out.println();
-		System.out.println("K-Nearest Neighbors Attribute Scores: ");
+		System.out.println("K-Nearest Neighbors Attribute Gain Ratios: ");
 		// Create a feature scoring algorithm
 		ga = new GainRatio();
 		// Apply the algorithm to the data set
